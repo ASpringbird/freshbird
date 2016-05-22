@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo-自定义属性-索引值的应用-图片切换效果</title>
+	<style>
+		ul{padding: 0;margin: 0;}
+		li{list-style:none;}
+		body{background: #333;}
+		#pic{width: 360px;height: 400px;position: relative;margin: 0 auto;
+			background: url(img/p_icon.gif) no-repeat center #fff;}
+		#pic img{width: 360px;height: 400px;}
+		#pic ul{width: 30px;position: absolute;top:0;right: -40px;}
+		#pic li{width: 30px;height: 30px;margin-bottom: 5px;background: #666;}
+		#pic .active{background: orange;}
+		#pic span{top: 0;}
+		#pic p{bottom: 4px;margin: 0;}
+		#pic p,#pic span{position: absolute;left: 0;
+			width: 360px;height: 20px;line-height: 20px;
+			text-align: center;color: #fff;font-size: 10px;}
+	</style>
+	<script>
+		window.onload=function(){
+			var oDiv=document.getElementById('pic');
+			var oImg=oDiv.getElementsByTagName('img')[0];
+			var oSpan=oDiv.getElementsByTagName('span')[0];
+			var oP=oDiv.getElementsByTagName('p')[0];
+			var oUl=oDiv.getElementsByTagName('ul')[0];
+			var aLi=oDiv.getElementsByTagName('li');
+
+			var arrUrl=["img/p1.jpg","img/p2.jpg","img/p3.jpg","img/p4.jpg"];
+			var arrTxt=["卡恩","贝克汉姆","卡卡","梅西"];
+
+			var num=0;
+
+			for(var i=0; i<arrUrl.length; i++){
+				oUl.innerHTML+="<li></li>";
+			}
+
+			function fnTab(){
+				oImg.src=arrUrl[num];
+				oSpan.innerHTML=1+num+"/"+arrUrl.length;
+				oP.innerHTML=arrTxt[num];
+				for(var i=0; i<aLi.length; i++){
+							aLi[i].className="";
+						}
+						aLi[num].className="active";
+			}
+			fnTab();
+
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].index=i;
+				aLi[i].onclick=function(){
+					num=this.index
+
+					fnTab();
+
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="pic">
+		<img src=""/>
+		<span>图片数量加载中…</span>
+		<p>文字说明加载中…</p>
+		<ul></ul>
+	</div>
+</body>
+</html>
